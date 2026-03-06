@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Suman Mandal | Full Stack Developer</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=block"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
@@ -43,6 +43,12 @@
       color: var(--text);
       overflow-x: hidden;
       cursor: default;
+      opacity: 0;
+      transition: opacity 0.3s ease-in;
+    }
+
+    body.fonts-loaded {
+      opacity: 1;
     }
 
     body::after {
@@ -1144,6 +1150,23 @@
   </footer>
 
   <script>
+    // Wait for fonts to load before showing content
+    if (document.fonts) {
+      document.fonts.ready.then(function() {
+        document.body.classList.add('fonts-loaded');
+      });
+    } else {
+      // Fallback for browsers that don't support Font Loading API
+      document.body.classList.add('fonts-loaded');
+    }
+
+    // Also add fonts-loaded class after a maximum of 3 seconds to prevent indefinite wait
+    setTimeout(function() {
+      if (!document.body.classList.contains('fonts-loaded')) {
+        document.body.classList.add('fonts-loaded');
+      }
+    }, 3000);
+
     // Basic animation on load and scroll
     document.addEventListener('DOMContentLoaded', function() {
       // Trigger nav animation immediately
