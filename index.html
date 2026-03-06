@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suman Mandal | Full Stack Developer</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #050510;
+      --bg2: #0a0a1f;
+      --panel: rgba(10, 5, 30, 0.85);
+      --neon-pink: #ff2d78;
+      --neon-cyan: #00f5ff;
+      --neon-purple: #bf5fff;
+      --neon-yellow: #ffe600;
+      --text: #e8e0ff;
+      --muted: #8878aa;
+      --border-pink: rgba(255, 45, 120, 0.35);
+      --border-cyan: rgba(0, 245, 255, 0.25);
+      --border-purple: rgba(191, 95, 255, 0.3);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.04) 2px, rgba(0, 0, 0, 0.04) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(rgba(0, 245, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 245, 255, 0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(5, 5, 16, 0.92);
+      border-bottom: 1px solid var(--border-cyan);
+      backdrop-filter: blur(10px);
+      padding: 0.9rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px var(--neon-cyan), 0 0 30px rgba(0, 245, 255, 0.4);
+      letter-spacing: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero-glow-1 {
+      position: absolute;
+      top: 10%;
+      left: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 45, 120, 0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      bottom: 10%;
+      right: 10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 245, 255, 0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-prefix {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--neon-cyan);
+      font-size: 0.9rem;
+      letter-spacing: 4px;
+      margin-bottom: 1rem;
+      opacity: 0.85;
+    }
+
+    .hero-prefix::before {
+      content: '>';
+    }
+
+    .hero-prefix::after {
+      content: '_';
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -2px;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .hero h1 .line1 {
+      display: block;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .hero h1 .line2 {
+      display: block;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 20px rgba(255, 45, 120, 0.5));
+    }
+
+    .hero-tagline {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--neon-yellow);
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      margin: 1.2rem 0 1rem;
+      text-shadow: 0 0 8px rgba(255, 230, 0, 0.5);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      font-weight: 500;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      position: relative;
+      background: transparent;
+      color: var(--neon-pink);
+      padding: 0.85rem 2.2rem;
+      border: 2px solid var(--neon-pink);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-decoration: none;
+      text-transform: uppercase;
+      clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+      transition: all 0.2s;
+      box-shadow: 0 0 15px rgba(255, 45, 120, 0.3), inset 0 0 15px rgba(255, 45, 120, 0.05);
+    }
+
+    .btn-primary:hover {
+      background: rgba(255, 45, 120, 0.15);
+      box-shadow: 0 0 30px rgba(255, 45, 120, 0.6), inset 0 0 20px rgba(255, 45, 120, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--neon-cyan);
+      padding: 0.85rem 2.2rem;
+      border: 2px solid var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-decoration: none;
+      text-transform: uppercase;
+      clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+      transition: all 0.2s;
+      box-shadow: 0 0 15px rgba(0, 245, 255, 0.2), inset 0 0 15px rgba(0, 245, 255, 0.05);
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 245, 255, 0.1);
+      box-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .stats-hud {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border-cyan);
+      border-bottom: 1px solid var(--border-pink);
+      padding: 2.5rem 2rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1rem 3rem;
+      border-right: 1px solid var(--border-purple);
+      position: relative;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-label-top {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--neon-cyan);
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      opacity: 0.8;
+    }
+
+    .stat-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 45, 120, 0.6);
+    }
+
+    .stat-val span {
+      color: var(--neon-pink);
+    }
+
+    .stat-unit {
+      font-family: 'Rajdhani', sans-serif;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      margin-top: 0.2rem;
+    }
+
+    .section-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-id {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--neon-cyan);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .section-id::before {
+      content: '// ';
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #fff;
+    }
+
+    h2 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 580px;
+      margin-top: 0.8rem;
+    }
+
+    .skills-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .skills-section-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+      padding-bottom: 0.5rem;
+      color: var(--neon-pink);
+      border-bottom-color: var(--border-pink);
+    }
+
+    .skills-section:nth-child(2) .skills-section-title {
+      color: var(--neon-cyan);
+      border-bottom: 1px solid var(--border-cyan);
+    }
+
+    .skills-section:nth-child(3) .skills-section-title {
+      color: var(--neon-purple);
+      border-bottom-color: var(--border-purple);
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skill-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border-cyan);
+      color: var(--neon-cyan);
+      background: rgba(0, 245, 255, 0.05);
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .skill-tag:hover {
+      background: rgba(0, 245, 255, 0.12);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 12px rgba(0, 245, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .skill-tag.green {
+      border-color: green;
+      color: greenyellow;
+      background: greenyellow;
+    }
+
+    .skill-tag.pink {
+      border-color: var(--border-pink);
+      color: var(--neon-pink);
+      background: rgba(255, 45, 120, 0.05);
+    }
+
+    .skill-tag.pink:hover {
+      background: rgba(255, 45, 120, 0.12);
+      box-shadow: 0 0 12px rgba(255, 45, 120, 0.3);
+    }
+
+    .skill-tag.purple {
+      border-color: var(--border-purple);
+      color: var(--neon-purple);
+      background: rgba(191, 95, 255, 0.05);
+    }
+
+    .skill-tag.purple:hover {
+      background: rgba(191, 95, 255, 0.12);
+      box-shadow: 0 0 12px rgba(191, 95, 255, 0.3);
+    }
+
+    .domains-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .domain-card {
+      background: var(--panel);
+      border: 1px solid var(--border-purple);
+      padding: 1.8rem;
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+      transition: all 0.25s;
+    }
+
+    .domain-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .domain-card:hover {
+      border-color: var(--neon-purple);
+      transform: translateY(-4px);
+    }
+
+    .domain-card:hover::before {
+      opacity: 1;
+    }
+
+    .domain-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 8px rgba(191, 95, 255, 0.5));
+    }
+
+    .domain-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--neon-purple);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .domain-items {
+      list-style: none;
+    }
+
+    .domain-items li {
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding: 0.25rem 0;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+    }
+
+    .domain-items li::before {
+      content: "▸ ";
+      color: var(--neon-cyan);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--neon-pink), var(--neon-purple), var(--neon-cyan), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      background: var(--panel);
+      border: 1px solid var(--border-purple);
+      padding: 1.8rem;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .timeline-item:hover {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 20px rgba(255, 45, 120, 0.15), inset 0 0 20px rgba(255, 45, 120, 0.03);
+    }
+
+    .timeline-item::before {
+      content: '◆';
+      position: absolute;
+      left: -2.1rem;
+      top: 1.6rem;
+      color: var(--neon-pink);
+      font-size: 0.7rem;
+      text-shadow: 0 0 10px var(--neon-pink), 0 0 20px rgba(255, 45, 120, 0.5);
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .job-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .job-company {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px rgba(0, 245, 255, 0.4);
+    }
+
+    .job-date {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--neon-yellow);
+      border: 1px solid rgba(255, 230, 0, 0.25);
+      background: rgba(255, 230, 0, 0.06);
+      padding: 0.25rem 0.7rem;
+      text-shadow: 0 0 6px rgba(255, 230, 0, 0.4);
+    }
+
+    .job-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin-top: 0.7rem;
+      font-weight: 500;
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: var(--panel);
+      border: 1px solid var(--border-cyan);
+      padding: 1.8rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+      transition: border-color 0.2s;
+    }
+
+    .edu-card:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.1);
+    }
+
+    .edu-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.4));
+    }
+
+    .edu-degree {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #fff;
+      letter-spacing: 0.3px;
+    }
+
+    .edu-school {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 6px rgba(0, 245, 255, 0.3);
+    }
+
+    .edu-year {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 0.3rem;
+    }
+
+    .contact-wrapper {
+      background: var(--panel);
+      border: 1px solid var(--border-pink);
+      padding: 3.5rem;
+      text-align: center;
+      clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255, 45, 120, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-wrapper h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid var(--border-cyan);
+      color: var(--neon-cyan);
+      background: rgba(0, 245, 255, 0.05);
+      padding: 0.8rem 1.6rem;
+      text-decoration: none;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: all 0.2s;
+    }
+
+    .contact-btn:hover {
+      background: rgba(0, 245, 255, 0.12);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border-cyan);
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer span {
+      color: var(--neon-pink);
+    }
+
+    @media (max-width:640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .stat-item {
+        padding: 1rem 1.5rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border-purple);
+      }
+
+      .stat-item:last-child {
+        border-bottom: none;
+      }
+
+      .contact-wrapper {
+        padding: 2rem 1.5rem;
+      }
+
+      .timeline {
+        padding-left: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">S.MANDAL</div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#domains">Domains</a></li>
+      <li><a href="#experience">XP</a></li>
+      <li><a href="#education">EDU</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="hero">
+    <div class="hero-glow-1">
+    </div>
+    <div class="hero-glow-2">
+    </div>
+    <div class="hero-content">
+      <div class="hero-prefix">INITIALIZING PROFILE</div>
+      <h1><span class="line1">SUMAN</span><span class="line2">MANDAL</span></h1>
+      <div class="hero-tagline">// FULL STACK DEVELOPER &nbsp;·&nbsp; SOFTWARE ARCHITECT &nbsp;·&nbsp; 10+ YRS EXP</div>
+      <p>Building scalable systems across FinTech, Sports, E-Commerce & more. JavaScript ecosystem specialist. ex-Oracle
+        · ex-Edelweiss · Technical Lead @ Encora.</p>
+      <div class="hero-buttons"><a href="#experience" class="btn-primary">View Experience</a><a href="#contact"
+          class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+  <div class="stats-hud">
+    <div class="stat-item">
+      <div class="stat-label-top">EXP LEVEL</div>
+      <div class="stat-val">10<span>+</span>
+      </div>
+      <div class="stat-unit">YEARS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label-top">COMPANIES</div>
+      <div class="stat-val">5<span>+</span>
+      </div>
+      <div class="stat-unit">EMPLOYERS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label-top">DOMAINS</div>
+      <div class="stat-val">6<span>+</span>
+      </div>
+      <div class="stat-unit">INDUSTRIES</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label-top">MAIN STACK</div>
+      <div class="stat-val" style="font-size:1.5rem; letter-spacing:1px;">JS<span>/TS</span>
+      </div>
+      <div class="stat-unit">PRIMARY LANG</div>
+    </div>
+  </div>
+  <div class="section-wrap" id="skills">
+    <div class="section-header">
+      <div class="section-id">SKILLS_MODULE</div>
+      <h2>Tech <em>Arsenal</em></h2>
+      <p class="section-desc">Core technologies, frameworks, and skills built across 10+ years of product development.
+      </p>
+    </div>
+    <div class="skills-section">
+      <div class="skills-section-title"># PRIMARY_SKILLS</div>
+      <div class="skills-grid"><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span
+          class="skill-tag">Node.js</span><span class="skill-tag">NestJS</span><span
+          class="skill-tag">Express.js</span><span class="skill-tag">Next.js</span><span
+          class="skill-tag">React.js</span><span class="skill-tag">LLM API Integration</span><span
+          class="skill-tag">Agentic AI</span><span class="skill-tag">RAG</span><span class="skill-tag">Prompt
+          Engineering</span>
+      </div>
+    </div>
+    <div class="skills-section">
+      <div class="skills-section-title"># SECONDARY_SKILLS</div>
+      <div class="skills-grid"><span class="skill-tag purple">Amazon Web Services</span><span
+          class="skill-tag purple">DevOps/CI/CD</span><span class="skill-tag purple">System Design</span><span
+          class="skill-tag purple">Event-Based Architecture</span><span class="skill-tag purple">Hybrid App
+          Development</span><span class="skill-tag purple">Solution Architecture</span>
+      </div>
+    </div>
+    <div class="skills-section">
+      <div class="skills-section-title"># OTHER_SKILLS</div>
+      <div class="skills-grid"><span class="skill-tag pink">Web 3 Engineering</span><span
+          class="skill-tag pink">Solidity JS</span><span class="skill-tag pink">HFT</span><span
+          class="skill-tag pink">Product Management</span><span class="skill-tag pink">Agile Methodology</span><span
+          class="skill-tag pink">Client Consulting</span><span class="skill-tag pink">Entrepreneurship</span>
+      </div>
+    </div>
+  </div>
+  <div class="section-wrap" id="domains">
+    <div class="section-header">
+      <div class="section-id">DOMAIN_EXPERTISE</div>
+      <h2>Battle-Tested <em>Domains</em></h2>
+      <p class="section-desc">Hands-on delivery across high-impact industries — from global banks to live sports
+        platforms.</p>
+    </div>
+    <div class="domains-grid">
+      <div class="domain-card">
+        <div class="domain-icon"><i class="fa-solid fa-building-columns" style="color: rgb(177, 151, 252);"></i>
+        </div>
+        <h3>FinTech &amp; Banking</h3>
+        <ul class="domain-items">
+          <li>Retail Banking Application</li>
+          <li>Structured Product Management</li>
+          <li>Portfolio Management</li>
+          <li>Payment Solutions</li>
+          <li>Open Banking</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon"><i class="fa-solid fa-bolt" style="color: rgb(177, 151, 252);"></i>
+        </div>
+        <h3>Utility</h3>
+        <ul class="domain-items">
+          <li>Electricity Rate Management</li>
+          <li>Utility Tech Projects</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon"><i class="fa-solid fa-basketball" style="color: rgb(177, 151, 252);"></i>
+        </div>
+        <h3>Sports Tech</h3>
+        <ul class="domain-items">
+          <li>Score Management</li>
+          <li>Live Streaming Apps</li>
+          <li>Prediction &amp; Betting Apps</li>
+          <li>Cricket &amp; Football Web Apps</li>
+          <li>Third-party Data Widgets</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon"><i class="fa-solid fa-cart-shopping" style="color: rgb(177, 151, 252);"></i>
+        </div>
+        <h3>E-Commerce</h3>
+        <ul class="domain-items">
+          <li>Brand Websites</li>
+          <li>E-Commerce Platforms</li>
+          <li>Shopify / WooCommerce</li>
+          <li>Facebook Business Integration</li>
+          <li>Wix Applications</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon"><i class="fa-brands fa-buffer" style="color: rgb(177, 151, 252);"></i>
+        </div>
+        <h3>Management</h3>
+        <ul class="domain-items">
+          <li>ERP Applications</li>
+          <li>CRM Applications</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon"><i class="fa-solid fa-pen-to-square" style="color: rgb(177, 151, 252);"></i>
+        </div>
+        <h3>Content</h3>
+        <ul class="domain-items">
+          <li>Tech Vlogs &amp; Blogs</li>
+          <li>Travel Content</li>
+          <li>Knowledge Sharing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="section-wrap" id="experience">
+    <div class="section-header">
+      <div class="section-id">CAREER_LOG</div>
+      <h2>Work <em>Experience</em></h2>
+      <p class="section-desc">A decade of engineering impact across multinationals, fintech firms, and product startups.
+      </p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">Technical Lead</div>
+            <div class="job-company">Encora Inc.</div>
+          </div>
+          <div class="job-date">AUG 2024 → PRESENT</div>
+        </div>
+        <p class="job-desc">As a Technical Lead at Encora, I am building the core infrastructure for <strong
+            style="color:#fff">Waystar (Iodine)</strong>, a mission-critical software engine that automates the
+          transition from diagnosis to claim. The system consumes and validates AI predictions for medical coding,
+          ensuring high-fidelity pre-bill generation and reducing human intervention in the billing cycle for the major
+          health tech leader.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">Senior Software Engineer</div>
+            <div class="job-company">Nearform</div>
+          </div>
+          <div class="job-date">NOV 2023 → MAR 2024</div>
+        </div>
+        <p class="job-desc">Contributed to building real-time pricing engines for <strong style="color:#fff">McKinsey &
+            Company</strong>. I focused on creating a seamless bridge between live data streams and inventory
+          management, allowing for automated, dynamic price adjustments. By architecting systems that respond instantly
+          to external feeds, I helped develop a platform that maximizes revenue through data-driven responsiveness.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">Senior Software Engineer</div>
+            <div class="job-company">Digit88 Technologies</div>
+          </div>
+          <div class="job-date">JUL 2022 → JUN 2023</div>
+        </div>
+        <p class="job-desc">Played a key role in developing and optimizing core systems for <strong
+            style="color:#fff">GridX</strong>, a leader in clean energy billing and pricing solutions. My work focused
+          on building robust architectures to manage complex utility pricing models and dynamic plan management based on
+          real-time consumption data. I contributed to scalable back-end services that enable utilities and energy
+          suppliers to streamline rate design and enhance billing accuracy, ultimately supporting the transition to a
+          more sustainable energy future </p>
+      </div>
+      <div class="timeline-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">Assistant Manager</div>
+            <div class="job-company">Edelweiss Financial Services</div>
+          </div>
+          <div class="job-date">APR 2020 → AUG 2021</div>
+        </div>
+        <p class="job-desc">Worked as a Full Stack Developer in Edelweiss Financial Services. Me and my team developed a
+          product called <strong style="color:#fff">SPACE</strong>for Edelweiss that helps to manage Structured
+          Products. Structured products are pre-packaged investments that normally include assets linked to interest
+          plus one or more derivatives. They are generally tied to an index or basket of securities, and are designed to
+          facilitate highly customized risk-return objectives. Worked on the development of the application that
+          streamlined this type of product creations and managed the flow</p>
+      </div>
+      <div class="timeline-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">Staff Consultant</div>
+            <div class="job-company">Oracle</div>
+          </div>
+          <div class="job-date">MAR 2017 → APR 2020</div>
+        </div>
+        <p class="job-desc">As a development consultant helped bank to deliver "Credit Card Origination Module for New
+          Customers" which is a sub-product of <strong style="color:#fff">Oracle Banking Digital Experience
+            (OBDX)</strong>. Me and my onsite team's responsibility was to handle the bulk load of developments of
+          critical requirements, hot fixing bugs in UAT and Production, also to act as intermediary between offshore IT,
+          business team and the bank on couple of occasions. As part of this team I have workd for -</p>
+        <ul class="domain-items" style="margin-top:0.5rem;">
+          <li>HDFC Bank, Mumbai, India</li>
+          <li>YES Bank, Mumbai, India</li>
+          <li>National Australian Bank, Melbourne, Australia</li>
+          <li>LV Bank, Chennai, India</li>
+          <li>Weatherbys Bank, London, UK</li>
+          <li>Butterfield Bank, Cayman Islands</li>
+          <li>Gibralter Bank, Gibraltar</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">Associate Consultant</div>
+            <div class="job-company">Oracle</div>
+          </div>
+          <div class="job-date">SEP 2015 → MAR 2017</div>
+        </div>
+        <p class="job-desc">Started working as an application developer developing one of the products of Oracle in
+          banking domain - <strong style="color:#fff">Oracle Banking Digital Experience (OBDX)</strong>. Handled initial
+          developments, expertized required coding skills. Apart from technical domain, learned to communicate with
+          clients and negotiate with them on CRs, deadlines etc.</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-wrap" id="education">
+    <div class="section-header">
+      <div class="section-id">TRAINING_DATA</div>
+      <h2>Academic <em>Background</em></h2>
+      <p class="section-desc">Engineering foundation from one of India's premier technical universities.</p>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-icon"><i class="fa-solid fa-graduation-cap" style="color: rgb(177, 151, 252);"></i>
+        </div>
+        <div>
+          <div class="edu-degree">B.E. Computer Science &amp; Engineering</div>
+          <div class="edu-school">Jadavpur University</div>
+          <div class="edu-year">2011 — 2015</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-wrap" id="contact">
+    <div class="contact-wrapper">
+      <div class="section-id" style="margin-bottom:0.5rem;">OPEN_CHANNEL</div>
+      <h2>Let's <em>Connect</em></h2>
+      <p style="color:var(--muted);max-width:500px;margin:1rem auto 0;line-height:1.7;font-size:1rem;">Open to new
+        missions, collaborations, and exciting engineering challenges. Let's talk tech over a virtual coffee. </p>
+      <div class="contact-links"><a href="mailto:suman.mandal.231293@gmail.com" class="contact-btn">📧
+          suman.mandal.231293@gmail.com </a><a href="https://www.linkedin.com/in/mandalsumanindia" target="_blank"
+          class="contact-btn">💼 linkedin/mandalsumanindia </a>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>© 2026 <span>SUMAN MANDAL</span>· FULL STACK DEVELOPER · SOFTWARE ADVOCATE ✦</p>
+  </footer>
+</body>
+
+</html>
