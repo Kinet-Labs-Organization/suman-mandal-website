@@ -747,6 +747,101 @@
         padding-left: 2rem;
       }
     }
+
+    /* Basic Section Animations */
+    .animate-fade-in {
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .animate-fade-in.animate {
+      opacity: 1 !important;
+      transform: translateY(0);
+    }
+
+    .animate-slide-up {
+      transform: translateY(50px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .animate-slide-up.animate {
+      opacity: 1 !important;
+      transform: translateY(0);
+    }
+
+    .animate-slide-left {
+      transform: translateX(-30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .animate-slide-left.animate {
+      opacity: 1 !important;
+      transform: translateX(0);
+    }
+
+    .animate-slide-right {
+      transform: translateX(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .animate-slide-right.animate {
+      opacity: 1 !important;
+      transform: translateX(0);
+    }
+
+    /* Staggered animations for timeline items */
+    .timeline-item {
+      transform: translateX(-20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .timeline-item.animate {
+      opacity: 1 !important;
+      transform: translateX(0);
+    }
+
+    /* Stats animation */
+    .stat-item {
+      transform: translateY(20px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    }
+
+    .stat-item.animate {
+      opacity: 1 !important;
+      transform: translateY(0);
+    }
+
+    /* Domain cards animation */
+    .domain-card {
+      transform: translateY(30px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .domain-card.animate {
+      opacity: 1 !important;
+      transform: translateY(0);
+    }
+
+    /* Skill tags animation */
+    .skill-tag {
+      transform: translateY(15px);
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    }
+
+    .skill-tag.animate {
+      opacity: 1 !important;
+      transform: translateY(0);
+    }
+
+    /* Nav slide down */
+    nav {
+      transform: translateY(-100%);
+      transition: transform 0.6s ease-out;
+    }
+
+    nav.animate {
+      transform: translateY(0);
+    }
   </style>
 </head>
 
@@ -761,7 +856,7 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
-  <div class="hero" id="landing">
+  <div class="hero animate-fade-in" id="landing">
     <div class="hero-glow-1">
     </div>
     <div class="hero-glow-2">
@@ -777,7 +872,7 @@
       </div>
     </div>
   </div>
-  <div class="stats-hud">
+  <div class="stats-hud animate-slide-up">
     <div class="stat-item">
       <div class="stat-label-top">EXP LEVEL</div>
       <div class="stat-val">10<span>+</span>
@@ -803,7 +898,7 @@
       <div class="stat-unit">PRIMARY LANG</div>
     </div>
   </div>
-  <div class="section-wrap" id="skills">
+  <div class="section-wrap animate-slide-left" id="skills">
     <div class="section-header">
       <div class="section-id">SKILLS_MODULE</div>
       <h2>Tech <em>Arsenal</em></h2>
@@ -837,7 +932,7 @@
       </div>
     </div>
   </div>
-  <div class="section-wrap" id="domains">
+  <div class="section-wrap animate-slide-right" id="domains">
     <div class="section-header">
       <div class="section-id">DOMAIN_EXPERTISE</div>
       <h2>Battle-Tested <em>Domains</em></h2>
@@ -911,7 +1006,7 @@
       </div>
     </div>
   </div>
-  <div class="section-wrap" id="experience">
+  <div class="section-wrap animate-fade-in" id="experience">
     <div class="section-header">
       <div class="section-id">CAREER_LOG</div>
       <h2>Work <em>Experience</em></h2>
@@ -1014,7 +1109,7 @@
       </div>
     </div>
   </div>
-  <div class="section-wrap" id="education">
+  <div class="section-wrap animate-slide-up" id="education">
     <div class="section-header">
       <div class="section-id">TRAINING_DATA</div>
       <h2>Academic <em>Background</em></h2>
@@ -1032,7 +1127,7 @@
       </div>
     </div>
   </div>
-  <div class="section-wrap" id="contact">
+  <div class="section-wrap animate-fade-in" id="contact">
     <div class="contact-wrapper">
       <div class="section-id" style="margin-bottom:0.5rem;">OPEN_CHANNEL</div>
       <h2>Let's <em>Connect</em></h2>
@@ -1047,6 +1142,104 @@
   <footer>
     <p>© 2026 <span>SUMAN MANDAL</span>· FULL STACK DEVELOPER · SOFTWARE ADVOCATE ✦</p>
   </footer>
+
+  <script>
+    // Basic animation on load and scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      // Trigger nav animation immediately
+      setTimeout(function() {
+        document.querySelector('nav').classList.add('animate');
+      }, 200);
+
+      // Trigger hero animation
+      setTimeout(function() {
+        document.querySelector('.hero').classList.add('animate');
+      }, 400);
+    });
+
+    // Intersection Observer for section animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-left, .animate-slide-right').forEach(function(el) {
+      observer.observe(el);
+      // Check if element is already in view on load
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('animate');
+      }
+    });
+
+    // Staggered animations for complex elements
+    const staggeredObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const children = entry.target.querySelectorAll('.timeline-item, .stat-item, .domain-card');
+          children.forEach(function(child, index) {
+            setTimeout(function() {
+              child.classList.add('animate');
+            }, index * 100);
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+
+    // Observe containers for staggered animations
+    document.querySelectorAll('.timeline, .stats-hud, .domains-grid').forEach(function(container) {
+      staggeredObserver.observe(container);
+      // Check if container is already in view on load
+      const rect = container.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        const children = container.querySelectorAll('.timeline-item, .stat-item, .domain-card');
+        children.forEach(function(child, index) {
+          setTimeout(function() {
+            child.classList.add('animate');
+          }, index * 100);
+        });
+      }
+    });
+
+    // Skill tags animation
+    document.querySelectorAll('.skills-grid').forEach(function(grid) {
+      skillsObserver.observe(grid);
+      // Check if grid is already in view on load
+      const rect = grid.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        const tags = grid.querySelectorAll('.skill-tag');
+        tags.forEach(function(tag, index) {
+          setTimeout(function() {
+            tag.classList.add('animate');
+          }, index * 50);
+        });
+      }
+    });
+
+    // Fallback: Show all sections after 2 seconds if Intersection Observer fails
+    setTimeout(function() {
+      document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-left, .animate-slide-right').forEach(function(el) {
+        if (!el.classList.contains('animate')) {
+          el.classList.add('animate');
+        }
+      });
+
+      document.querySelectorAll('.timeline-item, .stat-item, .domain-card, .skill-tag').forEach(function(el) {
+        if (!el.classList.contains('animate')) {
+          el.classList.add('animate');
+        }
+      });
+    }, 2000);
+  </script>
 </body>
 
 </html>
